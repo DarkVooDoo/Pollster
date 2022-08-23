@@ -6,3 +6,8 @@
     padding: 0 var(--Mobile-Page-Padding);
     background-color: aqua;
 }
+
+.navbar a{
+    font-weight: bold;
+    font-size: 1.2rem;
+}

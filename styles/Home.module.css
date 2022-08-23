@@ -1,4 +1,8 @@
 
+.poll_question{
+  margin-bottom: var(--Element-Margin-Bottom);
+}
+
 .form{
   --Input-Height: 3rem;
   width: 100%;
@@ -51,8 +55,11 @@
   background-color: transparent;
   border: 1px solid red;
   color: red;
+  font-weight: bold;
 }
 
 .form_action_createBtn{
-  background-color: aqua;
+  background-color: #54AFFF;
+  color: white;
+  font-weight: bold;
 }

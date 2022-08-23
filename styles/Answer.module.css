@@ -1,10 +1,46 @@
 .box{
+    position: relative;
     height: var(--Input-Height);
+    display: flex;
+    align-items: center;
     margin-bottom: var(--Element-Margin-Bottom);
     border-bottom: 1px solid black;
+    opacity: 0;
+    transition: opocity 1s linear;
+}
+
+.box_fade{
+    opacity: 1;
 }
 
 .box_input{
     height: 100%;
     width: 100%;
+    padding-right: var(--Input-Height);
+}
+
+.box_remove{
+    position: absolute;
+    right: var(--Input-Padding);
+    height: calc(var(--Input-Height) * .7);
+    width: calc(var(--Input-Height) * .7);
+    background-color: rgb(131, 131, 131);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box_remove_btn{
+}
+
+.box_remove_svg{
+    height: calc(var(--Input-Height) * .5);
+    width: calc(var(--Input-Height) * .5);
+    padding: .3rem;
+}
+
+.box_remove_svg_line{
+    fill: white;
+    stroke-width: .2;
 }

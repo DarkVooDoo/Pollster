@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Link from 'next/link'
+
 import styles from 'styles/Navbar.module.css'
 
 interface NavbarProps {
@@ -8,7 +10,7 @@ interface NavbarProps {
 const Navbar:React.FC<NavbarProps> = ({ })=>{
     return (
         <div className={styles.navbar}>
-            <h1>Pollster</h1>
+            <Link href="/" className={styles.navbar_home}>Pollster</Link>
             <button>Menu</button>
         </div>
 

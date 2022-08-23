@@ -7,9 +7,9 @@ import Layout from 'components/Layout'
 
 function MyApp({ Component, pageProps }: AppProps) {
 
-  const [answers, setAnswers] = useState<string[]>([""])
+  const [answers, setAnswers] = useState<Set<string>>(new Set([""]))
 
-  const onAnswersChange = (allAnswers: string[])=>{
+  const onAnswersChange = (allAnswers: Set<string>)=>{
     setAnswers(allAnswers)
   }
 
@@ -22,6 +22,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export const AnswersContext = React.createContext<[string[], (allAnswers: string[])=>void]>([[], ()=>{}])
+export const AnswersContext = React.createContext<[Set<string>, (allAnswers: Set<string>)=>void]>([new Set([]), ()=>{}])
 
 export default MyApp
