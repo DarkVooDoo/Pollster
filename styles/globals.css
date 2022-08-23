@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,400;1,700&display=swap');
+:root{
+
+  --Navbar-Height: 3rem;
+
+  --Desktop-Input-Height: 2.5rem;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1rem;
+}
+
+input, textarea{
+  outline: none;
+  padding: 0 .5rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
