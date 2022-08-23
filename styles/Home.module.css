@@ -1,31 +1,58 @@
-.container {
-  height: calc(100vh - var(--Navbar-Height));
-  width: 100%;
-  padding: 0 6rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
 .form{
-
+  --Input-Height: 3rem;
+  width: 100%;
 }
 
 .form_input{
   position: relative;
-  height: 2.2rem;
-  width: 60%;
+  display: flex;
+  align-items: center;
+  height: var(--Input-Height);
+  width: 100%;
 }
 
 .form_input_box{
   height: 100%;
   width: 100%;
-  background-color: gainsboro;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+.form_input_label{
+  position: absolute;
+  left: var(--Input-Padding);
+  top: calc((var(--Input-Height) / 2) - (1.5rem / 2));
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: gray;
+  transition: all .4s linear;
+}
+
+.form_input_box:valid + .form_input_label, .form_input_box:focus + .form_input_label{
+  top: 0;
+  font-size: .7rem;
+}
+
+.form_action{
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
+}
+
+.form_action_btn{
+  height: 2rem;
+  width: 30%;
   border-radius: 10px;
 }
 
-.form_input_box_label{
-  position: absolute;
+.form_action_backBtn{
+  background-color: transparent;
+  border: 1px solid red;
+  color: red;
+}
+
+.form_action_createBtn{
+  background-color: aqua;
 }

@@ -1,0 +1,10 @@
+.box{
+    height: var(--Input-Height);
+    margin-bottom: var(--Element-Margin-Bottom);
+    border-bottom: 1px solid black;
+}
+
+.box_input{
+    height: 100%;
+    width: 100%;
+}

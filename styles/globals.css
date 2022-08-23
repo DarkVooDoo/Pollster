@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,400;1,700&display=swap');
 :root{
+  
+  --Input-Padding: .5rem;
+  --Element-Margin-Bottom: 1rem;
+
+  --Mobile-Font-Size: .9rem;
+  --Mobile-Page-Padding: 1rem;
 
   --Navbar-Height: 3rem;
 
@@ -11,13 +17,30 @@
   margin: 0;
   box-sizing: border-box;
   font-family: 'Ubuntu', sans-serif;
-  font-size: 1rem;
+  font-size: var(--Mobile-Font-Size);
+}
+
+.container {
+  height: calc(100vh - var(--Navbar-Height));
+  width: 100%;
+  padding: 0 var(--Mobile-Page-Padding);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button{
+  border: none;
 }
 
 input, textarea{
   outline: none;
-  padding: 0 .5rem;
+  padding: 0 var(--Input-Padding);
+  border: none;
 }
+
 
 a {
   color: inherit;
