@@ -25,6 +25,10 @@ const Result:React.FC<ResultProps> = ({poll, total})=>{
         const hue = Math.floor(Math.random() * 360)
         return `hsl(${hue} ${saturation}% ${luminance}%)`
     }
+
+    useEffect(()=>{
+
+    }, [])
     
     const results = poll.map(item=>{
         const pourcentage = calcPourcentage(total, item.answer_amount)

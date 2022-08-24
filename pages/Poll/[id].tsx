@@ -1,7 +1,7 @@
 import {GetServerSideProps, NextPage} from 'next'
 import Head from 'next/head'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import styles from 'styles/Poll.module.css'
 
@@ -23,6 +23,18 @@ interface PollProps {
 }
 const Poll:NextPage<PollProps> = ({id, alreadyVote, poll, total})=>{
 
+    const [totalVotes, setTotalVotes] = useState(total)
+    const [pollPayload, setPollPayload] = useState(poll)
+    const [userVote, setUserVote] = useState(alreadyVote)
+
+    const onUserVote = (answer_id: string)=> {
+        const index = pollPayload.findIndex(item=>item.answer_id === answer_id)
+        pollPayload[index] = {...pollPayload[index], answer_amount: pollPayload[index].answer_amount+1}
+        setPollPayload([...pollPayload])
+        setTotalVotes(prev=>prev+1)
+        setUserVote(true)
+    }
+
     useEffect(()=>{
         (async ()=>{
             // const sse = new EventSource(`/api/poll/${id}`)
@@ -38,7 +50,7 @@ const Poll:NextPage<PollProps> = ({id, alreadyVote, poll, total})=>{
             <Head>
                 <title>Poll </title>
             </Head>
-            {alreadyVote ? <Result {...{poll, total}} /> : <Vote {...{poll}} />}
+            {userVote ? <Result {...{poll: pollPayload, total: totalVotes}} /> : <Vote {...{poll: pollPayload, onUserVote}} />}
 
         </>
     )

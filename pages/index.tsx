@@ -32,6 +32,8 @@ const Home: NextPage = () => {
 
   }
 
+  const onUserVote = ()=> setIsQuestion(false)
+
   const onUpdateAnswerToRender = ()=>{
     const allAnswers = new Set<string>(answers)
     setAnswers(allAnswers)

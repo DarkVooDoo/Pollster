@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 import styles from 'styles/Poll.module.css'
 
 interface VoteProps {
+    onUserVote: (answer_id: string)=> void,
     poll: {
         poll_id: string,
         poll_question: string,
@@ -12,7 +13,7 @@ interface VoteProps {
         answer_amount: number
     }[]
 }
-const Vote:React.FC<VoteProps> = ({poll })=>{
+const Vote:React.FC<VoteProps> = ({poll, onUserVote })=>{
     const [pickAnswer, setPickAnswer] = useState("")
 
     const onAddVote = async ()=>{
@@ -21,6 +22,7 @@ const Vote:React.FC<VoteProps> = ({poll })=>{
             headers: [["Content-Type", "application/json"]],
             body: JSON.stringify({answer_id: pickAnswer})
         })
+        if(vote.status === 200) onUserVote(pickAnswer)
     }
 
     const answers = poll.map(item=>(
