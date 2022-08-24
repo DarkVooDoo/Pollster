@@ -1,0 +1,30 @@
+.poll_question{
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: var(--Element-Margin-Bottom);
+}
+
+.poll_answers{
+    counter-set: answer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.poll_answers_single{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: var(--Element-Margin-Bottom);
+    height: 2rem;
+    width: 100%;
+    padding: 0 .3rem;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.poll_answers_single::before{
+    counter-increment: answer;
+    content: counter(answer);
+}

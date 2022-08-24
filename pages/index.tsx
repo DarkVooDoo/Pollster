@@ -1,6 +1,8 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import { useContext, useState } from 'react'
+
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import { AnswersContext } from './_app'
 
@@ -9,6 +11,8 @@ import Answer from 'components/Answer'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
+
+  const router = useRouter()
 
   const [answers, setAnswers] = useContext(AnswersContext)
   const [isQuestion, setIsQuestion] = useState(true)
@@ -21,6 +25,11 @@ const Home: NextPage = () => {
       headers: [["Content-Type", "application/json"]],
       body: JSON.stringify({answers: Array.from(answers), question})
     })
+
+    if(addPoll.status !== 200) return
+    const {id} = await addPoll.json()
+    router.push(`/Poll/${id}`)
+
   }
 
   const onUpdateAnswerToRender = ()=>{
