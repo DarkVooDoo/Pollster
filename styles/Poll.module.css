@@ -1,3 +1,10 @@
+.poll_container{
+    --Button-Height: 2.5rem;
+    width: 100%;
+    border: 1px solid black;
+    padding: .5rem;
+}
+
 .poll_question{
     font-size: 1.1rem;
     font-weight: bold;
@@ -5,7 +12,6 @@
 }
 
 .poll_answers{
-    counter-set: answer;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -21,10 +27,26 @@
     width: 100%;
     padding: 0 .3rem;
     border-radius: 10px;
-    border: 1px solid black;
 }
 
-.poll_answers_single::before{
-    counter-increment: answer;
-    content: counter(answer);
+.poll_button{
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.poll_button_vote, .poll_button_result{
+    height: var(--Button-Height);
+    padding: 0 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+}
+
+.poll_button_vote{
+    background-color: #3E72FF;
+}
+
+.poll_button_result{
+    background-color: #FF7454;
 }

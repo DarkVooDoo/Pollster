@@ -35,10 +35,9 @@ export const GetPoll = async (poll_id: string)=>{
 
 export const AddVote = async (answer_id: string)=>{
     try{
-        const {rows} = await DB.query("UPDATE TABLE Answer SET answer_amount=answer_amount+1 WHERE answer_id=$1 RETURNING *", [answer_id])
-        console.log(rows)
+        await DB.query("UPDATE Answer SET answer_amount=answer_amount+1 WHERE answer_id=$1", [answer_id])
     }catch(err){
-        console.log("Error")
+        console.log(err)
         throw(err)
     }
 }

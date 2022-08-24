@@ -12,7 +12,14 @@ export default async (req: NextApiRequest, res: NextApiResponse)=>{
         res.send("He")
 
     }else if(req.method === "POST"){
-        const updatePoll = await AddVote(req.body.answer_id)
+        try{
+            const {id}:any = req.query
+            await AddVote(req.body.answer_id)
+            res.setHeader("Set-Cookie", `${id}=yes;Path=/;SameSite=Strict;Max-Age=${60*60*24}`)
+            res.send({status: "Success"})
+        }catch(err){
+            res.status(403).send("Forbidden")
+        }
     }
 
 }

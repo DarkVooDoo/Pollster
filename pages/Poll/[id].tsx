@@ -5,8 +5,12 @@ import { useEffect } from 'react'
 
 import styles from 'styles/Poll.module.css'
 
+import Vote from 'components/Vote'
+import Result from 'components/Result'
+
 interface PollProps {
     id: string,
+    alreadyVote: boolean,
     poll: {
         poll_id: string,
         poll_question: string,
@@ -16,45 +20,36 @@ interface PollProps {
         answer_amount: number
     }[]
 }
-const Poll:NextPage<PollProps> = ({id, poll})=>{
+const Poll:NextPage<PollProps> = ({id, alreadyVote, poll})=>{
 
     useEffect(()=>{
         (async ()=>{
-            const sse = new EventSource(`/api/poll/${id}`)
-            sse.onmessage = (e)=>{
-                console.log(JSON.parse(e.data))
-            }
+            // const sse = new EventSource(`/api/poll/${id}`)
+            // sse.onmessage = (e)=>{
+            //     console.log(JSON.parse(e.data))
+            // }
         })() 
     }, [])
 
-    const answers = poll.map(item=>(
-        <div key={item.answer_id} className={styles.poll_answers_single}>
-            <p>{item.answer_text} </p>
-        </div>
-    ))
 
     return (
         <>
             <Head>
                 <title>Poll </title>
             </Head>
-            <>
-                <h2 className={styles.poll_question}>{poll[0].poll_question}</h2>
-                <div className={styles.poll_answers}>
-                    {answers}
-                </div>
-            </>
+            {alreadyVote ? <Result {...{poll}} /> : <Vote {...{poll}} />}
 
         </>
     )
 }
 
-export const getServerSideProps:GetServerSideProps = async (e)=>{
-    const id = e.params?.id
+export const getServerSideProps:GetServerSideProps = async ({params, req})=>{
+    const id:any = params?.id
+    const alreadyVote = req.cookies[id] ? true : false
     const fetchPoll = await fetch(`http://localhost:3000/api/poll?id=${id}`)
     const poll = await fetchPoll.json()
 
-    return {props: {id, poll}}
+    return {props: {id, alreadyVote, poll}}
 }
 
 export default Poll
