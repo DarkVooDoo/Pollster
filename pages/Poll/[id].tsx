@@ -11,6 +11,7 @@ import Result from 'components/Result'
 interface PollProps {
     id: string,
     alreadyVote: boolean,
+    total: number,
     poll: {
         poll_id: string,
         poll_question: string,
@@ -20,7 +21,7 @@ interface PollProps {
         answer_amount: number
     }[]
 }
-const Poll:NextPage<PollProps> = ({id, alreadyVote, poll})=>{
+const Poll:NextPage<PollProps> = ({id, alreadyVote, poll, total})=>{
 
     useEffect(()=>{
         (async ()=>{
@@ -37,7 +38,7 @@ const Poll:NextPage<PollProps> = ({id, alreadyVote, poll})=>{
             <Head>
                 <title>Poll </title>
             </Head>
-            {alreadyVote ? <Result {...{poll}} /> : <Vote {...{poll}} />}
+            {alreadyVote ? <Result {...{poll, total}} /> : <Vote {...{poll}} />}
 
         </>
     )
@@ -49,7 +50,7 @@ export const getServerSideProps:GetServerSideProps = async ({params, req})=>{
     const fetchPoll = await fetch(`http://localhost:3000/api/poll?id=${id}`)
     const poll = await fetchPoll.json()
 
-    return {props: {id, alreadyVote, poll}}
+    return {props: {id, alreadyVote, ...poll}}
 }
 
 export default Poll

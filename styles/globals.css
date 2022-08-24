@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,400;1,700&display=swap');
 :root{
   
+  --Blue-Button: #3E72FF;
   --Input-Padding: .5rem;
   --Element-Margin-Bottom: 1rem;
 

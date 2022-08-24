@@ -26,7 +26,8 @@ export const CreatePoll = async ({answers, question}:CreatePollTypes)=>{
 export const GetPoll = async (poll_id: string)=>{
     try{
         const {rows} = await DB.query("SELECT * FROM Poll LEFT JOIN Answer ON poll_id=answer_question_id WHERE poll_id=$1", [poll_id])
-        return rows
+        const total = rows.reduce((acc, item)=>acc + item.answer_amount, 0)
+        return {total, poll: rows}
     }catch(err){
         console.log(err)
         throw("Error")

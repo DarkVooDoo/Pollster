@@ -1,11 +1,17 @@
 
 .poll_question{
   margin-bottom: var(--Element-Margin-Bottom);
+  text-align: center;
 }
 
 .form{
   --Input-Height: 3rem;
   width: 100%;
+  padding: .5rem;
+  border-radius: 10px;
+  box-shadow: 0px 0px 18px 2px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 18px 2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 18px 2px rgba(0,0,0,0.75);
 }
 
 .form_input{

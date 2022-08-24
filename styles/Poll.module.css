@@ -1,8 +1,6 @@
 .poll_container{
     --Button-Height: 2.5rem;
     width: 100%;
-    border: 1px solid black;
-    padding: .5rem;
 }
 
 .poll_question{
@@ -44,7 +42,7 @@
 }
 
 .poll_button_vote{
-    background-color: #3E72FF;
+    background-color: var(--Blue-Button);
 }
 
 .poll_button_result{
