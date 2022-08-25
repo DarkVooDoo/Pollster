@@ -25,7 +25,7 @@ export const CreatePoll = async ({answers, question}:CreatePollTypes)=>{
 
 export const GetPoll = async (poll_id: string)=>{
     try{
-        const {rows} = await DB.query("SELECT * FROM Poll LEFT JOIN Answer ON poll_id=answer_question_id WHERE poll_id=$1", [poll_id])
+            const {rows} = await DB.query("SELECT * FROM Poll LEFT JOIN Answer ON poll_id=answer_question_id WHERE poll_id=$1 ORDER BY answer_amount DESC", [poll_id])
         const total = rows.reduce((acc, item)=>acc + item.answer_amount, 0)
         return {total, poll: rows}
     }catch(err){
@@ -36,7 +36,7 @@ export const GetPoll = async (poll_id: string)=>{
 
 export const AddVote = async (answer_id: string)=>{
     try{
-        await DB.query("UPDATE Answer SET answer_amount=answer_amount+1 WHERE answer_id=$1", [answer_id])
+        await DB.query("UPDATE Answer SET answer_amount=answer_amount+1 WHERE answer_id=$1 RETURNING answer_amount", [answer_id])
     }catch(err){
         console.log(err)
         throw(err)

@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import styles from 'styles/Result.module.css'
-
-const COLORS = ['#40F99B', '#FFC857', '#8DE969', '#8BE8CB', '#7EBC89', '#D7C0D0']
 
 interface ResultProps {
     total: number,
@@ -16,23 +14,36 @@ interface ResultProps {
     }[]
 }
 const Result:React.FC<ResultProps> = ({poll, total})=>{
-
+    let jsonData:any = ""
+    const [dynamicTotal, setDynamicTotal] = useState(total)
+    const [pollAnswers, setPollAnswers] = useState(poll)
     const calcPourcentage = (total: number, votes: number)=>((votes / total) * 100).toFixed(1)
 
-    const getRandomColor = ()=>{
+    const getRandomColor = useMemo(()=>{
         const luminance = Math.floor(Math.random() * (80 - 50)) + 50
         const saturation = Math.floor(Math.random() * 100)
         const hue = Math.floor(Math.random() * 360)
         return `hsl(${hue} ${saturation}% ${luminance}%)`
-    }
+    }, [])
 
     useEffect(()=>{
-
+        (async ()=>{
+            const sse = new EventSource(`/api/poll/${poll[0].poll_id}`)
+            sse.onmessage = (e)=>{
+                jsonData = JSON.parse(e.data)
+                if(jsonData.payload){
+                    const pollUpdate = JSON.parse(jsonData.payload)
+                    setDynamicTotal(pollUpdate.total)
+                    setPollAnswers(pollUpdate.poll)
+                    jsonData = ""
+                }
+            }
+        })()
     }, [])
     
-    const results = poll.map(item=>{
-        const pourcentage = calcPourcentage(total, item.answer_amount)
-        const backgroundColor = getRandomColor()
+    const results = pollAnswers.map(item=>{
+        const pourcentage = calcPourcentage(dynamicTotal, item.answer_amount)
+        const backgroundColor = getRandomColor
         return (
             <div className={styles.poll_result} key={item.answer_id}>
                 <b>{item.answer_text} </b>
@@ -48,7 +59,7 @@ const Result:React.FC<ResultProps> = ({poll, total})=>{
             <h3 className={styles.poll_question}>{poll[0].poll_question} </h3>
             {results}
             <div className={styles.poll_separator} />
-            <h3 className={styles.poll_total}>Total Votes: {total} </h3>
+            <h3 className={styles.poll_total}>Total Votes: {dynamicTotal} </h3>
         </div>
 
     )

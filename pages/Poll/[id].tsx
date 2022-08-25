@@ -3,8 +3,6 @@ import Head from 'next/head'
 
 import { useEffect, useState } from 'react'
 
-import styles from 'styles/Poll.module.css'
-
 import Vote from 'components/Vote'
 import Result from 'components/Result'
 
@@ -34,16 +32,6 @@ const Poll:NextPage<PollProps> = ({id, alreadyVote, poll, total})=>{
         setTotalVotes(prev=>prev+1)
         setUserVote(true)
     }
-
-    useEffect(()=>{
-        (async ()=>{
-            // const sse = new EventSource(`/api/poll/${id}`)
-            // sse.onmessage = (e)=>{
-            //     console.log(JSON.parse(e.data))
-            // }
-        })() 
-    }, [])
-
 
     return (
         <>
