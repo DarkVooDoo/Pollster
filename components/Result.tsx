@@ -27,18 +27,16 @@ const Result:React.FC<ResultProps> = ({poll, total})=>{
     }, [])
 
     useEffect(()=>{
-        (async ()=>{
-            const sse = new EventSource(`/api/poll/${poll[0].poll_id}`)
-            sse.onmessage = (e)=>{
-                jsonData = JSON.parse(e.data)
-                if(jsonData.payload){
-                    const pollUpdate = JSON.parse(jsonData.payload)
-                    setDynamicTotal(pollUpdate.total)
-                    setPollAnswers(pollUpdate.poll)
-                    jsonData = ""
-                }
+        let job:NodeJS.Timer
+        job = setInterval(async ()=>{
+            const fetchPoll = await fetch(`/api/poll?id=${poll[0].poll_id}`)
+            const refreshPoll = await fetchPoll.json()
+            setPollAnswers(refreshPoll.poll)
+            setDynamicTotal(refreshPoll.total)
+        }, 60000)
+            return ()=>{
+                clearInterval(job)
             }
-        })()
     }, [])
     
     const results = pollAnswers.map(item=>{
