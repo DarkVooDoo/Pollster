@@ -69,3 +69,15 @@
   color: white;
   font-weight: bold;
 }
+
+@media screen and (min-width: 428px){
+  .form{
+      width: 70%;
+  }
+}
+
+@media screen and (min-width: 1025px){
+  .form{
+      width: 50%;
+  }
+}

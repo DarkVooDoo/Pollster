@@ -35,3 +35,17 @@
     font-weight: bold;
 }
 
+@media screen and (min-width: 428px){
+    .poll{
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 1025px){
+    .poll{
+        width: 50%;
+    }
+}
+
+
+
