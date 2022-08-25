@@ -14,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse)=>{
             const {id}:any = req.query
             await AddVote(req.body.answer_id)
             
-            res.setHeader("Set-Cookie", `${id}=yes;Path=/;SameSite=Strict;Max-Age=${60*60*24}`)
+            res.setHeader("Set-Cookie", `${id}=${req.headers['user-agent']};Path=/;SameSite=Strict;Max-Age=${60*60*24}`)
             res.send({status: "Success"})
         }catch(err){
             res.status(403).send("Forbidden")
